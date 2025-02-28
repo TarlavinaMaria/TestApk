@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
                 // Передаем данные в Intent
-                intent.putExtra("EXTRA_NAME", name);
-                intent.putExtra("EXTRA_AGE", age);
+                intent.putExtra("NAME", name);
+                intent.putExtra("AGE", age);
 
                 // Запускаем SecondActivity
                 startActivity(intent);
