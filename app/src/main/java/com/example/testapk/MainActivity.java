@@ -1,58 +1,43 @@
 package com.example.testapk;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import androidx.activity.EdgeToEdge;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    EditText editTextName, editTextAge;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate");
-    }
+        // Получаем данные с формы
+        editTextName = findViewById(R.id.editTextName);
+        editTextAge = findViewById(R.id.editTextAge);
+        button = findViewById(R.id.buttonGo);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Получаем имя и возраст
+                String name = editTextName.getText().toString(); // Преобразуем Editable в String
+                int age = Integer.parseInt(editTextAge.getText().toString()); // Преобразуем String в int
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
+                // Создаем Intent для перехода на SecondActivity
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
+                // Передаем данные в Intent
+                intent.putExtra("EXTRA_NAME", name);
+                intent.putExtra("EXTRA_AGE", age);
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
+                // Запускаем SecondActivity
+                startActivity(intent);
+            }
+        });
     }
 }
