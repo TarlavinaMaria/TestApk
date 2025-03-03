@@ -1,17 +1,21 @@
 package com.example.testapk;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonOpenGoogle;
+    EditText urlInput;
+    Button openUrlButton;
+    Button openUrlInWebViewButton;
     WebView webView;
 
     @Override
@@ -19,22 +23,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonOpenGoogle = findViewById(R.id.buttonOpenGoogle);
+        urlInput = findViewById(R.id.urlInput);
+        openUrlButton = findViewById(R.id.openUrlButton);
+        // WebView
+        openUrlInWebViewButton = findViewById(R.id.openUrlInWebViewButton);
         webView = findViewById(R.id.webView);
 
-        // Настройка WebView
-        webView.setWebViewClient(new WebViewClient()); // Открываем ссылки внутри WebView
-        webView.getSettings().setJavaScriptEnabled(true); // Включаем поддержку JavaScript
 
-        // Обработка нажатия на кнопку "Открыть Google"
-        buttonOpenGoogle.setOnClickListener(new View.OnClickListener() {
+        openUrlButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Показываем WebView
+                String url = urlInput.getText().toString();
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "http://" + url;
+                }
+
+                // Открытие URL в браузере
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(Intent.createChooser(intent, "Выберите приложение"));
+            }
+        });
+
+        // Настройка WebView
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        openUrlInWebViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 webView.setVisibility(View.VISIBLE);
 
-                // Загружаем Google
-                webView.loadUrl("https://www.google.com");
+                String url = urlInput.getText().toString().trim();
+                webView.loadUrl("https://google.com/search?q=" + url);
             }
         });
     }
