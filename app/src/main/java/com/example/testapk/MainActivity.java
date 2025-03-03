@@ -3,40 +3,38 @@ package com.example.testapk;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editTextName, editTextAge;
-    Button button;
+    Button buttonOpenGoogle;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Получаем данные с формы
-        editTextName = findViewById(R.id.editTextName);
-        editTextAge = findViewById(R.id.editTextAge);
-        button = findViewById(R.id.buttonGo);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonOpenGoogle = findViewById(R.id.buttonOpenGoogle);
+        webView = findViewById(R.id.webView);
+
+        // Настройка WebView
+        webView.setWebViewClient(new WebViewClient()); // Открываем ссылки внутри WebView
+        webView.getSettings().setJavaScriptEnabled(true); // Включаем поддержку JavaScript
+
+        // Обработка нажатия на кнопку "Открыть Google"
+        buttonOpenGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Получаем имя и возраст
-                String name = editTextName.getText().toString(); // Преобразуем Editable в String
-                int age = Integer.parseInt(editTextAge.getText().toString()); // Преобразуем String в int
+            public void onClick(View v) {
+                // Показываем WebView
+                webView.setVisibility(View.VISIBLE);
 
-                // Создаем Intent для перехода на SecondActivity
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-
-                // Передаем данные в Intent
-                intent.putExtra("NAME", name);
-                intent.putExtra("AGE", age);
-
-                // Запускаем SecondActivity
-                startActivity(intent);
+                // Загружаем Google
+                webView.loadUrl("https://www.google.com");
             }
         });
     }

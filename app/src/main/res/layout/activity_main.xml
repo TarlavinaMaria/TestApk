@@ -6,34 +6,19 @@
     android:padding="16dp"
     android:gravity="center">
 
-    <!-- Поле для ввода имени -->
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Введите имя" />
 
-    <!-- Поле для ввода возраста -->
-    <EditText
-        android:id="@+id/editTextAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Введите возраст"
-        android:inputType="number" />
-
-    <!-- Кнопка для перехода на вторую активность -->
     <Button
-        android:id="@+id/buttonGo"
+        android:id="@+id/buttonOpenGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Перейти"
-        android:layout_marginTop="16dp" />
+        android:text="Открыть Google"
+        android:layout_gravity="center_horizontal" />
 
-    <!-- ImageView с картинкой -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/image"
+    <!-- WebView для отображения Google -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_marginTop="16dp" />
 </LinearLayout>
