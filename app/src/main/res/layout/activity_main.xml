@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Поле ввода текста -->
     <EditText
-        android:id="@+id/urlInput"
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите URL"
-        android:inputType="textUri"/>
+        android:hint="Введите текст"/>
 
+    <!-- Кнопка "Сохранить" -->
     <Button
-        android:id="@+id/openUrlButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Открыть в браузере"
-        android:layout_below="@id/urlInput"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/openUrlInWebViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Открыть в WebView"
-        android:layout_below="@id/openUrlButton"
-        android:layout_marginTop="16dp"/>
-
-    <WebView
-        android:id="@+id/webView"
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/openUrlInWebViewButton"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content"
+        android:text="Сохранить"
+        android:layout_marginTop="16dp"/>
 
-</RelativeLayout>
+    <!-- Кнопка "Загрузить" -->
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Загрузить"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
